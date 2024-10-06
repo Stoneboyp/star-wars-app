@@ -6,6 +6,7 @@ import CharacterDetails from "@/components/CharacterDetails";
 const GET_CHARACTER_DETAILS = gql`
   query GetCharacter($id: ID!) {
     person(id: $id) {
+      id
       name
       birthYear
       gender

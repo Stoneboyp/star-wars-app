@@ -9,6 +9,7 @@ export interface Film {
 }
 
 export interface Person {
+  id: string;
   name: string;
   birthYear: string;
   gender: string;

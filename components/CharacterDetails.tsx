@@ -1,6 +1,10 @@
 import { Film, Person } from "@/types/types";
+import { Icons } from "./Icons";
+import { useFavoriteStore } from "@/store";
 
 const CharacterDetails = ({ character }: { character: Person }) => {
+  const { favorites } = useFavoriteStore();
+  const isFavorite = favorites.some((fav) => fav.id === character.id);
   const characterAttributes = [
     { label: "Birth Year", value: character.birthYear },
     { label: "Gender", value: character.gender },
@@ -10,7 +14,10 @@ const CharacterDetails = ({ character }: { character: Person }) => {
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold mb-4">{character.name}</h1>
+      <div className="flex items-baseline">
+        <h1 className="text-3xl font-bold mb-4">{character.name}</h1>
+        {isFavorite && <span className="ml-2">{Icons.heart}</span>}
+      </div>
       {characterAttributes.map((attr) => (
         <p key={attr.label}>
           <strong>{attr.label}:</strong> {attr.value}

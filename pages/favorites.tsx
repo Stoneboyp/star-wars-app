@@ -1,5 +1,5 @@
-import { FavoriteCharacter, useFavoriteStore } from "@/store";
-import Link from "next/link";
+import { useFavoriteStore } from "@/store";
+import FavLink from "@/components/FavLink";
 
 export default function Favorites() {
   const favorites = useFavoriteStore((state) => state.favorites);
@@ -12,18 +12,10 @@ export default function Favorites() {
       ) : (
         <ul className="space-y-4">
           {favorites.map((character) => (
-            <li key={character.id}>
-              <FavLink character={character} />
-            </li>
+            <FavLink key={character.id} character={character} />
           ))}
         </ul>
       )}
     </div>
   );
 }
-
-const FavLink = ({ character }: { character: FavoriteCharacter }) => (
-  <Link href={`/character/${character.id}`}>
-    <div className="hover:underline">{character.name}</div>
-  </Link>
-);
